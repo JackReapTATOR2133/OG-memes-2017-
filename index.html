@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🔥 MLG 2017 DANK MEMES 420 NO SCOPE ULTIMATE PORTAL 🔥</title>
+  <link rel="stylesheet" href="css.css">
+</head>
+<body id="page-body">
+
+  <!-- Audio unlock banner -->
+  <div id="sound-banner">
+    <button class="ignite-btn" onclick="initToxicAudio()">
+      🔊 КЛІКНИ СЮДИ ЩОБ УВІМКНУТИ 2017 БАСИ & АУДІО РАДІАЦІЮ 🔊
+    </button>
+  </div>
+
+  <!-- Marquee 1 -->
+  <div class="marquee-container">
+    <div class="marquee-text">
+      🔥 2017 DANK COMPILATION 🔥 MLG 360 NO SCOPE 🔥 MOM GET THE CAMERA 🔥 OH BABY A TRIPLE 🔥 ILLUMINATI CONFIRMED 🔺 🔥 SMOKE WEED EVERY DAY 🔥 DAT BOI O SHIT WADDUP 🐸 🔥 HARAMBE DIED FOR THIS 🔥
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="subtitle-badge">⚠️ УВАГА: РІВЕНЬ ТОКСИЧНОСТІ 420,000% ⚠️</div>
+    <h1 class="glitch-title">DANK MEMES 2017 PORTAL</h1>
+    <p style="font-size: 1.6rem; color: #00ffff; margin: 5px 0;">
+      ОФІЦІЙНИЙ САЙТ ДЛЯ СПРАВЖНІХ MLG КІБЕРСПОРТСМЕНІВ ТА СПІНЕР-МАЙСТРІВ
+    </p>
+
+    <!-- Floating stickers -->
+    <div class="floating-sticker" style="top: 20px; left: 3%;" onclick="playAirhorn()">
+      <span style="font-size: 60px;">🐸</span>
+      <div style="font-size: 12px; background: #000; color: #00ff00;">DAT BOI</div>
+    </div>
+    <div class="floating-sticker" style="top: 40px; right: 4%; animation-delay: -2s;" onclick="playBassNuke()">
+      <span style="font-size: 60px;">🔺</span>
+      <div style="font-size: 12px; background: #000; color: #ff00ff;">CONFIRMED</div>
+    </div>
+  </header>
+
+  <!-- Marquee 2 reverse -->
+  <div class="marquee-container marquee-reverse">
+    <div class="marquee-text marquee-reverse">
+      ⚡ БЕЗКОШТОВНІ СПІНЕРИ ⚡ СКАЧАТИ БЕЗ СМС ⚡ КРУТИ ДО ВТРАТИ СВІДОМОСТІ ⚡ 1000000 RPM ⚡ 360 NO SCOPE WALLBANG ⚡
+    </div>
+  </div>
+
+  <!-- Main layout -->
+  <div class="main-grid">
+
+    <!-- LEFT COLUMN: Soundboard & Controls -->
+    <aside>
+      <div class="cyber-box">
+        <h2>🔊 MLG SOUNDBOARD</h2>
+        <div class="soundboard-grid">
+          <button class="mlg-btn" onclick="playAirhorn()">
+            <span>📢📢</span>
+            <span>AIRHORN</span>
+          </button>
+          <button class="mlg-btn" onclick="playBassNuke()">
+            <span>💣💥</span>
+            <span>BASS NUKE</span>
+          </button>
+          <button class="mlg-btn" onclick="playHitmarker()">
+            <span>🎯</span>
+            <span>HITMARKER</span>
+          </button>
+          <button class="mlg-btn" onclick="playSniperShot()">
+            <span>🔫</span>
+            <span>QUICKSCOPE</span>
+          </button>
+          <button class="mlg-btn" onclick="playSadViolin()">
+            <span>🎻😭</span>
+            <span>SAD VIOLIN</span>
+          </button>
+          <button class="mlg-btn" onclick="playWowSynth()">
+            <span>😲✨</span>
+            <span>MLG WOW</span>
+          </button>
+          <button class="mlg-btn" onclick="playSanicSpeed()">
+            <span>💨🦔</span>
+            <span>SANIC RUN</span>
+          </button>
+          <button class="mlg-btn" onclick="toggleTrapBeat()">
+            <span id="beat-icon">🎵🔥</span>
+            <span id="beat-label">TRAP BEAT</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="cyber-box controls-panel">
+        <h2>🎛️ ДЕЕП-ФРАЙ ПАНЕЛЬ</h2>
+        
+        <div>
+          <div class="toxic-slider-label">
+            <span>ЯДЕРНИЙ ДИПФРАЙ:</span>
+            <span id="fry-val">100%</span>
+          </div>
+          <input type="range" id="fry-slider" min="100" max="600" value="100" oninput="updateFry(this.value)">
+        </div>
+
+        <div>
+          <div class="toxic-slider-label">
+            <span>ЗЕМЛЕТРУС (BASS SHAKE):</span>
+          </div>
+          <button class="mlg-btn" style="width: 100%;" onclick="toggleEarthquake()">
+            🌋 АКТИВУВАТИ ЗЕМЛЕТРУС 🌋
+          </button>
+        </div>
+
+        <div>
+          <button class="mlg-btn" style="width: 100%; background: linear-gradient(180deg, #ff00ff, #00ffff);" onclick="spawnPopup()">
+            🎁 БЕЗКОШТОВНИЙ СКАМ 2017
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- CENTER COLUMN: MEME ARENA -->
+    <main class="meme-arena">
+
+      <!-- MEME 1: FIDGET SPINNER SIMULATOR -->
+      <section class="meme-card">
+        <div class="meme-title">🌀 ГОЛОВНИЙ ФІДЖЕТ СПІНЕР 2017 РОКУ 🌀</div>
+        <p style="color: #00ffff; font-size: 1.2rem;">
+          КЛІКАЙ АБО ДОВБИ ПО НЬОМУ ДЛЯ РОЗГОНУ ПОНАД 9000 RPM!
+        </p>
+
+        <div class="visual-wrapper" onclick="spinFaster()">
+          <!-- SVG Fidget Spinner -->
+          <svg id="spinner-svg" class="fidget-spinner" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="14" fill="#000" stroke="#fff" stroke-width="3"/>
+            <!-- 3 lobes -->
+            <g fill="#ff0055" stroke="#ffff00" stroke-width="3">
+              <circle cx="50" cy="18" r="16" />
+              <circle cx="22" cy="68" r="16" />
+              <circle cx="78" cy="68" r="16" />
+            </g>
+            <!-- Lobe bearings -->
+            <circle cx="50" cy="18" r="7" fill="#000" stroke="#00ffff" stroke-width="2"/>
+            <circle cx="22" cy="68" r="7" fill="#000" stroke="#00ffff" stroke-width="2"/>
+            <circle cx="78" cy="68" r="7" fill="#000" stroke="#00ffff" stroke-width="2"/>
+            <!-- Center cap -->
+            <circle cx="50" cy="50" r="8" fill="#ffff00" />
+          </svg>
+
+          <div style="margin-top: 15px; font-size: 1.8rem; color: #ff00ff;">
+            ШВИДКІСТЬ: <span id="rpm-counter" style="color: #ffff00; font-size: 2.2rem;">0</span> RPM
+          </div>
+          <div id="rpm-status" style="color: #00ff00; font-size: 1.2rem; height: 25px;">
+            Крути скоріше, діду!
+          </div>
+        </div>
+      </section>
+
+      <!-- MEME 2: ILLUMINATI CONFIRMED -->
+      <section class="meme-card">
+        <div class="meme-title">🔺 ILLUMINATI CONFIRMED (100% REAL) 🔺</div>
+        
+        <div class="visual-wrapper">
+          <svg class="illuminati-pyramid" viewBox="0 0 100 100" onclick="playBassNuke()">
+            <!-- Triangle -->
+            <polygon points="50,10 90,85 10,85" fill="#22aa22" stroke="#ffff00" stroke-width="4"/>
+            <polygon points="50,22 80,80 20,80" fill="#117711"/>
+            <!-- Eye Outline -->
+            <ellipse cx="50" cy="55" rx="18" ry="10" fill="#ffffff" stroke="#000" stroke-width="2"/>
+            <!-- Pupil -->
+            <circle cx="50" cy="55" r="5" fill="#ff0000"/>
+            <circle cx="50" cy="55" r="2" fill="#000"/>
+            <!-- Ray lines -->
+            <line x1="50" y1="5" x2="50" y2="0" stroke="#ffff00" stroke-width="3"/>
+            <line x1="30" y1="12" x2="22" y2="4" stroke="#ffff00" stroke-width="3"/>
+            <line x1="70" y1="12" x2="78" y2="4" stroke="#ffff00" stroke-width="3"/>
+          </svg>
+
+          <!-- Red glowing lens flares -->
+          <div class="lens-flare-eye" style="top: 48%; left: 47%;"></div>
+
+          <p style="font-size: 1.5rem; color: #ffff00; margin-top: 20px;">
+            ЗБІГ? НЕ ДУМАЮ. 2+2 = 4 - 1 = 3 (ТРИКУТНИК МАКВІН)
+          </p>
+          <button class="mlg-btn" onclick="playSadViolin()">▶ ГРАТИ ДРАМАТИЧНУ СКРИПКУ</button>
+        </div>
+      </section>
+
+      <!-- MEME 3: DORITOS & MOUNTAIN DEW SNIPER CORNER -->
+      <section class="meme-card">
+        <div class="meme-title">🌿 MLG 360 NO SCOPE SNIPER DEN 🌿</div>
+        
+        <div class="visual-wrapper">
+          <div style="display: flex; gap: 30px; align-items: center; justify-content: center; flex-wrap: wrap;">
+            
+            <!-- Doritos SVG -->
+            <svg class="doritos-chip" viewBox="0 0 100 100" onclick="playAirhorn()">
+              <polygon points="50,10 92,85 8,85" fill="#ff6600" stroke="#ffcc00" stroke-width="4"/>
+              <circle cx="45" cy="45" r="3" fill="#cc3300"/>
+              <circle cx="60" cy="65" r="4" fill="#cc3300"/>
+              <circle cx="35" cy="70" r="3" fill="#cc3300"/>
+              <text x="50" y="60" font-size="12" font-weight="bold" fill="#fff" text-anchor="middle" font-family="Impact">DORITOS</text>
+            </svg>
+
+            <!-- Crosshair SVG -->
+            <svg style="width: 120px; height: 120px; animation: spinBounce 2s infinite linear;" viewBox="0 0 100 100" onclick="playSniperShot()">
+              <circle cx="50" cy="50" r="45" fill="none" stroke="#00ff00" stroke-width="4"/>
+              <circle cx="50" cy="50" r="25" fill="none" stroke="#00ff00" stroke-width="2"/>
+              <line x1="50" y1="0" x2="50" y2="100" stroke="#ff0000" stroke-width="3"/>
+              <line x1="0" y1="50" x2="100" y2="50" stroke="#ff0000" stroke-width="3"/>
+              <circle cx="50" cy="50" r="4" fill="#ff0000"/>
+            </svg>
+
+            <!-- Mountain Dew can SVG -->
+            <svg style="width: 90px; height: 140px; filter: drop-shadow(0 0 15px #00ff00);" viewBox="0 0 80 130" onclick="playAirhorn()">
+              <rect x="10" y="15" width="60" height="100" rx="8" fill="#00bb00" stroke="#ffff00" stroke-width="3"/>
+              <ellipse cx="40" cy="15" rx="30" ry="8" fill="#999999"/>
+              <ellipse cx="40" cy="115" rx="30" ry="8" fill="#008800"/>
+              <text x="40" y="60" font-size="14" font-weight="bold" fill="#ffff00" text-anchor="middle" font-family="Impact" transform="rotate(-15 40 60)">MTN</text>
+              <text x="40" y="80" font-size="16" font-weight="bold" fill="#ff0000" text-anchor="middle" font-family="Impact" transform="rotate(-15 40 80)">DEW</text>
+            </svg>
+
+          </div>
+
+          <div style="margin-top: 15px; font-size: 1.4rem; color: #00ff00;">
+            КЛІКНИ БУДЬ-ДЕ НА ЕКРАНІ ЩОБ ОТРИМАТИ ХІТМАРКЕР!
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- RIGHT COLUMN: CHAT / STATS / BANNERS -->
+    <aside>
+      <div class="cyber-box">
+        <h2>🏆 ТВОЯ MLG СТАТИСТИКА</h2>
+        <div style="font-size: 1.2rem; line-height: 1.8; color: #fff;">
+          <div>🎯 Кліків/Хітмаркерів: <span id="stat-hits" style="color: #ffff00;">0</span></div>
+          <div>📢 Гудків Airhorn: <span id="stat-horns" style="color: #00ff00;">0</span></div>
+          <div>🔥 Рівень хайпу: <span style="color: #ff007f;">OVER 9000</span></div>
+          <div>🕶️ Thug Life: <span style="color: #00ffff;">100%</span></div>
+          <div>🥔 Картопляних серверів: <span style="color: #ffff00;">420</span></div>
+        </div>
+      </div>
+
+      <div class="cyber-box" style="text-align: center;">
+        <h2>🔥 ТОП МЕМИ 2017</h2>
+        <ul style="list-style: none; padding: 0; font-size: 1.15rem; line-height: 2; text-align: left;">
+          <li>🐸 <b>Dat Boi</b> (O shit waddup)</li>
+          <li>🦍 <b>Harambe</b> (Never forget)</li>
+          <li>🎺 <b>Shooting Stars</b> (Bag Raiders)</li>
+          <li>🧽 <b>Mocking Spongebob</b> (mOcKiNg)</li>
+          <li>🌀 <b>Fidget Spinners</b> (Vshhhh)</li>
+          <li> salt <b>Salt Bae</b> (Шедеврально)</li>
+          <li>🕶️ <b>Roll Safe</b> (Thinking guy meme)</li>
+          <li>💃 <b>Shooting Stars</b> galaxy meme</li>
+        </ul>
+      </div>
+
+      <div class="cyber-box" style="background: #2b0000; border-color: #ff0000; text-align: center;">
+        <h2 style="color: #ff0000;">⚠️ СПАМ-БАРОН ⚠️</h2>
+        <p style="font-size: 1.1rem; color: #ffff00;">
+          ВИ ВІДВІДУВАЧ НОМЕР #42069! ВИ ВИГРАЛИ БЕЗКОШТОВНИЙ АЙФОН 7 ТА 1 ТОННУ ДОШИРАКУ!
+        </p>
+        <button class="mlg-btn" style="width: 100%; font-size: 1.3rem;" onclick="spawnPopup()">
+          ЗАБРАТИ ПРИЗ 💸
+        </button>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- Retro Windows 98 Scam Popup (Draggable / Spawnable) -->
+  <div id="retro-popup" class="win-popup">
+    <div class="win-titlebar">
+      <span>⚠️ ПОМИЛКА 420: MLG OVERLOAD</span>
+      <div class="win-close" onclick="closePopup()">✕</div>
+    </div>
+    <div class="win-body">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span style="font-size: 35px;">⚠️</span>
+        <span style="font-weight: bold; color: #000;">ВІТАЄМО! ВАШ КОМП'ЮТЕР ЗАРАЖЕНО ВІРУСОМ 2017 РОКУ!</span>
+      </div>
+      <p style="margin: 0; color: #333; font-size: 0.85rem;">
+        Щоб вилікувати систему, крутіть спінер не менше 3 годин поспіль або надішліть цей сайт 10 друзям!
+      </p>
+      <div style="display: flex; gap: 10px;">
+        <button class="win-btn" onclick="scamAction()">ОК (Завантажити)</button>
+        <button class="win-btn" onclick="closePopup()">Скасувати</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div style="font-size: 2rem; color: var(--toxic-green); margin-bottom: 10px;">
+      ✨ ДЯКУЄМО ЗА ВІДВІДУВАННЯ ГОЛОВНОГО МЕМ-СЕРВЕРА 2017 РОКУ ✨
+    </div>
+    <p>Зроблено з любов'ю до MLG монтажів, Sony Vegas Pro 13, зеленого хрому та басів, що рвуть колонки.</p>
+    <p style="color: #888; font-size: 0.9rem;">
+      © 2017-2026 FAZE CLAN NO SCOPE SNIPER SQUAD LLC. NO RIGHTS RESERVED.
+    </p>
+  </footer>
+
+  <script src="javas.js"></script>
+</body>
+</html>

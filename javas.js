@@ -27,7 +27,8 @@ function initToxicAudio() {
 function playAirhorn() {
   const ctx = getAudioContext();
   hornCount++;
-  document.getElementById('stat-horns').innerText = hornCount;
+  const hornElem = document.getElementById('stat-horns');
+  if (hornElem) hornElem.innerText = hornCount;
 
   const pitches = [466.16, 466.16, 466.16, 0, 466.16, 0, 466.16, 554.37, 466.16];
   const times =   [0,      0.12,   0.24,   0.36, 0.40,  0.52, 0.56,  0.72,   0.90];
@@ -38,7 +39,7 @@ function playAirhorn() {
     const now = ctx.currentTime + t;
     const dur = durations[i];
 
-    // Dual oscillators for that brassy blaring horn texture
+    // Dual oscillators for brassy blaring horn texture
     const osc1 = ctx.createOscillator();
     const osc2 = ctx.createOscillator();
     const gain = ctx.createGain();
@@ -47,7 +48,7 @@ function playAirhorn() {
     osc2.type = 'square';
 
     osc1.frequency.setValueAtTime(pitches[i], now);
-    osc2.frequency.setValueAtTime(pitches[i] * 1.006, now); // Detune for fat brass
+    osc2.frequency.setValueAtTime(pitches[i] * 1.006, now); // Detune
 
     gain.gain.setValueAtTime(0.3, now);
     gain.gain.exponentialRampToValueAtTime(0.001, now + dur);
@@ -89,7 +90,6 @@ function playBassNuke() {
   const ctx = getAudioContext();
   const now = ctx.currentTime;
 
-  // Sub oscillator
   const osc = ctx.createOscillator();
   const gain = ctx.createGain();
   const shaper = ctx.createWaveShaper();
@@ -126,7 +126,6 @@ function playSniperShot() {
   const ctx = getAudioContext();
   const now = ctx.currentTime;
 
-  // Noise buffer for blast
   const bufferSize = ctx.sampleRate * 0.3;
   const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
   const data = buffer.getChannelData(0);
@@ -171,21 +170,20 @@ function playSniperShot() {
 // 5. SAD VIOLIN (Tremolo minor scale)
 function playSadViolin() {
   const ctx = getAudioContext();
-  const notes = [440, 415, 392, 349, 330]; // A4, G#4, G4, F4, E4
+  const notes = [440, 415, 392, 349, 330];
   const durations = [0.4, 0.4, 0.4, 0.4, 0.9];
   let t = ctx.currentTime;
 
   notes.forEach((freq, i) => {
     const osc = ctx.createOscillator();
-    const lfo = ctx.createOscillator(); // Vibrato
+    const lfo = ctx.createOscillator();
     const lfoGain = ctx.createGain();
     const gain = ctx.createGain();
 
     osc.type = 'sawtooth';
     osc.frequency.setValueAtTime(freq, t);
 
-    // Vibrato setup
-    lfo.frequency.setValueAtTime(6.5, t); // 6.5 Hz vibrato
+    lfo.frequency.setValueAtTime(6.5, t);
     lfoGain.gain.setValueAtTime(8, t);
     lfo.connect(osc.frequency);
 
@@ -248,7 +246,7 @@ function playSanicSpeed() {
   osc.stop(now + 0.45);
 }
 
-// 8. SYNTHESIZED TRAP BEAT LOOP (No audio files needed!)
+// 8. SYNTHESIZED TRAP BEAT LOOP
 function toggleTrapBeat() {
   const ctx = getAudioContext();
   if (isTrapBeatRunning) {
@@ -262,12 +260,11 @@ function toggleTrapBeat() {
   document.getElementById('beat-label').innerText = 'ЗУПИНИТИ';
   
   let step = 0;
-  const stepDuration = 140; // ~140 BPM 16th notes
+  const stepDuration = 140;
 
   trapBeatTimer = setInterval(() => {
     const now = ctx.currentTime;
 
-    // Kick on steps 0, 8, 10
     if (step === 0 || step === 8 || step === 10) {
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
@@ -281,12 +278,10 @@ function toggleTrapBeat() {
       osc.stop(now + 0.12);
     }
 
-    // Snare on step 4, 12
     if (step === 4 || step === 12) {
       playHitmarker();
     }
 
-    // Hi-hat on every step, faster roll on 14-15
     if (step % 2 === 0 || step >= 14) {
       const hatOsc = ctx.createOscillator();
       const hatGain = ctx.createGain();
@@ -305,21 +300,21 @@ function toggleTrapBeat() {
 }
 
 // ==========================================
-// INTERACTIVE HITMARKERS ON CLICK
+// INTERACTIVE HITMARKERS ON CLICK & MOBILE TOUCH
 // ==========================================
-document.addEventListener('click', (e) => {
-  // Don't duplicate for button clicks
-  if (e.target.closest('#sound-banner')) return;
+let lastTouchTime = 0;
 
+function triggerHitEffect(x, y) {
   hitCount++;
-  document.getElementById('stat-hits').innerText = hitCount;
+  const hitsElem = document.getElementById('stat-hits');
+  if (hitsElem) hitsElem.innerText = hitCount;
   playHitmarker();
 
   // Create hitmarker graphic
   const hm = document.createElement('div');
   hm.className = 'hitmarker';
-  hm.style.left = `${e.clientX}px`;
-  hm.style.top = `${e.clientY}px`;
+  hm.style.left = `${x}px`;
+  hm.style.top = `${y}px`;
   hm.innerHTML = `
     <svg viewBox="0 0 40 40" style="width:100%; height:100%;">
       <line x1="5" y1="5" x2="15" y2="15" stroke="#ffffff" stroke-width="3"/>
@@ -331,11 +326,27 @@ document.addEventListener('click', (e) => {
   document.body.appendChild(hm);
   setTimeout(() => hm.remove(), 350);
 
-  // Create floating meme trail particle
-  spawnParticle(e.clientX, e.clientY);
+  // Floating meme particle
+  spawnParticle(x, y);
+}
+
+// Touch support for phones
+document.addEventListener('touchstart', (e) => {
+  if (e.target.closest('#sound-banner') || e.target.closest('button') || e.target.closest('input')) return;
+  lastTouchTime = Date.now();
+  if (e.touches && e.touches[0]) {
+    triggerHitEffect(e.touches[0].clientX, e.touches[0].clientY);
+  }
+}, { passive: true });
+
+// Mouse click support (ignored if right after touch to prevent duplicates)
+document.addEventListener('click', (e) => {
+  if (e.target.closest('#sound-banner')) return;
+  if (Date.now() - lastTouchTime < 400) return; // Prevent ghost click
+  triggerHitEffect(e.clientX, e.clientY);
 });
 
-// Cursor Particle Trail
+// Cursor & Touch Particle Trail
 const memeIcons = ['🐸', '🔺', '💯', '🔫', '✨', '🔥', '🧀', '🕶️', '🌀'];
 function spawnParticle(x, y) {
   const p = document.createElement('div');
@@ -343,8 +354,8 @@ function spawnParticle(x, y) {
   p.innerText = memeIcons[Math.floor(Math.random() * memeIcons.length)];
   p.style.left = `${x}px`;
   p.style.top = `${y}px`;
-  const tx = (Math.random() - 0.5) * 120;
-  const ty = (Math.random() - 0.5) * 120 - 40;
+  const tx = (Math.random() - 0.5) * 100;
+  const ty = (Math.random() - 0.5) * 100 - 30;
   p.style.setProperty('--tx', `${tx}px`);
   p.style.setProperty('--ty', `${ty}px`);
   document.body.appendChild(p);
@@ -352,7 +363,7 @@ function spawnParticle(x, y) {
 }
 
 // ==========================================
-// FIDGET SPINNER LOGIC
+// FIDGET SPINNER LOGIC (TOUCH + CLICK)
 // ==========================================
 let spinnerRPM = 0;
 let spinnerAngle = 0;
@@ -360,8 +371,8 @@ const spinnerSvg = document.getElementById('spinner-svg');
 const rpmCounter = document.getElementById('rpm-counter');
 const rpmStatus = document.getElementById('rpm-status');
 
-function spinFaster() {
-  spinnerRPM += 1250;
+function spinFaster(boost = 1250) {
+  spinnerRPM += boost;
   playSanicSpeed();
   if (spinnerRPM > 9000) {
     rpmStatus.innerText = "🚨 IT'S OVER 9000000000! ТАК ТРИМАТИ! 🚨";
@@ -371,6 +382,32 @@ function spinFaster() {
     rpmStatus.innerText = "🔥 НАДЗВУКОВИЙ БАБУСИН СПІНЕР! 🔥";
     rpmStatus.style.color = "#ff00ff";
   }
+}
+
+// Mobile touch swipe on spinner
+const spinnerContainer = document.getElementById('spinner-container');
+if (spinnerContainer) {
+  let touchStartY = 0;
+  let touchStartX = 0;
+
+  spinnerContainer.addEventListener('touchstart', (e) => {
+    if (e.touches && e.touches[0]) {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    }
+  }, { passive: true });
+
+  spinnerContainer.addEventListener('touchmove', (e) => {
+    if (e.touches && e.touches[0]) {
+      const dx = Math.abs(e.touches[0].clientX - touchStartX);
+      const dy = Math.abs(e.touches[0].clientY - touchStartY);
+      if (dx > 25 || dy > 25) {
+        spinFaster(600);
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+      }
+    }
+  }, { passive: true });
 }
 
 // Animation Loop for spinner
@@ -409,27 +446,33 @@ function triggerScreenShake() {
 }
 
 // ==========================================
-// RETRO WINDOWS POPUPS
+// RETRO WINDOWS POPUPS (RESPONSIVE)
 // ==========================================
-const scamTitles = [
-  "🎁 ВИ ВИГРАЛИ 1,000,000 БЕЗКОШТОВНИХ СПІНЕРІВ!",
-  "⚡ О БОЖЕ! ВАШ ФЛЕШ-ПЛЕЄР ЗАСТАРІВ!",
-  "⚠️ ТЕЛЕФОНУЙТЕ У FAZE CLAN НЕГАЙНО!",
-  "🐸 DAT BOI ХОЧЕ ЗНАТИ ВАШЕ МІСЦЕЗНАХОДЖЕННЯ"
-];
-
 function spawnPopup() {
   playAirhorn();
   const pop = document.getElementById('retro-popup');
   pop.style.display = 'block';
-  pop.style.top = `${Math.random() * 50 + 15}%`;
-  pop.style.left = `${Math.random() * 50 + 15}%`;
+
+  // Responsive boundary check for mobile screens
+  const screenW = window.innerWidth;
+  const screenH = window.innerHeight;
+  const popW = Math.min(320, screenW * 0.92);
+  const popH = 220;
+
+  const maxLeft = Math.max(10, screenW - popW - 10);
+  const maxTop = Math.max(10, screenH - popH - 10);
+
+  const randLeft = Math.floor(Math.random() * (maxLeft - 10)) + 10;
+  const randTop = Math.floor(Math.random() * (maxTop - 10)) + 10;
+
+  pop.style.left = `${randLeft + popW / 2}px`;
+  pop.style.top = `${randTop + popH / 2}px`;
 }
 
 function closePopup() {
   playHitmarker();
   document.getElementById('retro-popup').style.display = 'none';
-  // Toxic trick: 50% chance to immediately spawn two more!
+  // 50% chance to duplicate
   if (Math.random() > 0.5) {
     setTimeout(spawnPopup, 400);
   }
